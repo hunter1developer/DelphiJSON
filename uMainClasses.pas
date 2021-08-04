@@ -53,7 +53,7 @@ type
     FJSON: string;
   public
     constructor Create(const fileName: string);
-    function CreateDriver(const ID: Integer; const Name: string; const Phone: string): TDriver;
+    procedure CreateDriver(const ID: Integer; const Name: string; const Phone: string);
     procedure loadFromJson();
     procedure saveToJson();
     property JSON: string read FJSON;
@@ -65,7 +65,7 @@ type
     FJSON: string;
   public
     constructor Create(const fileName: string);
-    function CreateAuto(const ID: Integer; const Brand, Color, Model, Number: string): TAuto;
+    procedure CreateAuto(const ID: Integer; const Brand, Color, Model, Number: string);
     procedure loadFromJson();
     procedure saveToJson();
     property JSON: string read FJSON;
@@ -77,7 +77,7 @@ type
     FJSON: string;
   public
     constructor Create(const fileName: string);
-    function CreateTrip(const AutoID, DriverID: Integer; const StartTime: TDateTime): TTrip;
+    procedure CreateTrip(const AutoID, DriverID: Integer; const StartTime: TDateTime);
     procedure loadFromJson();
     procedure saveToJson();
     property JSON: string read FJSON;
@@ -93,7 +93,7 @@ begin
   Self.FFileName := fileName;
 end;
 
-function TDriverList.CreateDriver(const ID: Integer; const Name, Phone: string): TDriver;
+procedure TDriverList.CreateDriver(const ID: Integer; const Name, Phone: string);
 var
   Driver: TDriver;
 begin
@@ -101,7 +101,7 @@ begin
   Driver.ID     := ID;
   Driver.Name   := Name;
   Driver.Phone  := Phone;
-  Result        := Driver;
+  Self.Add(Driver);
 end;
 
 procedure TDriverList.loadFromJson();
@@ -126,7 +126,7 @@ begin
           joName := jv as TJSONObject;
           Name := joName.Get('Name').JSONValue.Value;
           Phone := joName.Get('Phone').JSONValue.Value;
-          Self.Add(Self.CreateDriver(ID, Name, Phone));
+          Self.CreateDriver(ID, Name, Phone);
           Inc(ID);
         end;
       end else
@@ -169,7 +169,7 @@ begin
   Self.FFileName := fileName;
 end;
 
-function TAutoList.CreateAuto(const ID: Integer; const Brand, Color, Model, Number: string): TAuto;
+procedure TAutoList.CreateAuto(const ID: Integer; const Brand, Color, Model, Number: string);
 var
   Auto: TAuto;
 begin
@@ -179,7 +179,7 @@ begin
   Auto.Color  := Color;
   Auto.Model  := Model;
   Auto.Number := Number;
-  Result := Auto;
+  Self.Add(Auto);
 end;
 
 procedure TAutoList.loadFromJson();
@@ -216,7 +216,7 @@ begin
           if findJSONValue <> nil then Model := findJSONValue.Value;
           findJSONValue := joName.FindValue('Number');
           if findJSONValue <> nil then Number := findJSONValue.Value;
-          Self.Add(Self.CreateAuto(ID, Brand, Color, Model, Number));
+          Self.CreateAuto(ID, Brand, Color, Model, Number);
           Inc(ID);
         end;
       end else
@@ -262,8 +262,8 @@ begin
   Self.FFileName := fileName;
 end;
 
-function TTripList.CreateTrip(const AutoID, DriverID: Integer;
-  const StartTime: TDateTime): TTrip;
+procedure TTripList.CreateTrip(const AutoID, DriverID: Integer;
+  const StartTime: TDateTime);
 var
   Trip: TTrip;
 begin
@@ -271,7 +271,7 @@ begin
   Trip.AutoID    := AutoID;
   Trip.DriverID  := DriverID;
   Trip.StartTime := StartTime;
-  Result := Trip;
+  Self.Add(Trip);
 end;
 
 procedure TTripList.loadFromJson;
@@ -301,7 +301,7 @@ begin
           if findJSONValue <> nil then DriverID := StrToInt(findJSONValue.Value);
           findJSONValue := joName.FindValue('StartTime');
           if findJSONValue <> nil then StartTime := StrToDateTime(findJSONValue.Value);
-          Self.Add(Self.CreateTrip(AutoID, DriverID, StartTime));
+          Self.CreateTrip(AutoID, DriverID, StartTime);
           Inc(ID);
         end;
       end else

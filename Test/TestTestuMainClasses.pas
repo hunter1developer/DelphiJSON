@@ -95,9 +95,9 @@ procedure TestTDriverList.testSaveToJSON;
 begin
   FDriverList.Clear;
 
-  FDriverList.Add(FDriverList.CreateDriver(1, 'Frank Martin', '555-0100'));
-  FDriverList.Add(FDriverList.CreateDriver(2, 'Travis Bickle', '555-0123'));
-  FDriverList.Add(FDriverList.CreateDriver(3, 'Daniel Moralex', '555-0130'));
+  FDriverList.CreateDriver(1, 'Frank Martin', '555-0100');
+  FDriverList.CreateDriver(2, 'Travis Bickle', '555-0123');
+  FDriverList.CreateDriver(3, 'Daniel Moralex', '555-0130');
 
   Check(FDriverList.Count = 3);
 
@@ -158,9 +158,9 @@ procedure TestTAutoList.testSaveToJSON;
 begin
   FAutoList.Clear;
 
-  FAutoList.Add(FAutoList.CreateAuto(1, 'Peugeot', 'White', '406', EmptyStr));
-  FAutoList.Add(FAutoList.CreateAuto(2, 'BMW', 'Brown', '735i', '930UHV06'));
-  FAutoList.Add(FAutoList.CreateAuto(3, 'Checker Taxi', 'Yellow', EmptyStr, EmptyStr));
+  FAutoList.CreateAuto(1, 'Peugeot', 'White', '406', EmptyStr);
+  FAutoList.CreateAuto(2, 'BMW', 'Brown', '735i', '930UHV06');
+  FAutoList.CreateAuto(3, 'Checker Taxi', 'Yellow', EmptyStr, EmptyStr);
 
   Check(FAutoList.Count = 3);
 
@@ -222,9 +222,9 @@ end;
 procedure TestTTripList.testSaveToJSON;
 begin
   FTripList.Clear;
-  FTripList.Add(FTripList.CreateTrip(1, 2, StrToDateTime('18.6.2021 01:02:03')));
-  FTripList.Add(FTripList.CreateTrip(3, 4, StrToDateTime('18.6.2021 01:02:03')));
-  FTripList.Add(FTripList.CreateTrip(5, 6, StrToDateTime('18.6.2021 01:02:03')));
+  FTripList.CreateTrip(1, 2, StrToDateTime('18.6.2021 01:02:03'));
+  FTripList.CreateTrip(3, 4, StrToDateTime('18.6.2021 01:02:03'));
+  FTripList.CreateTrip(5, 6, StrToDateTime('18.6.2021 01:02:03'));
 
   Check(FTripList.Count = 3);
 

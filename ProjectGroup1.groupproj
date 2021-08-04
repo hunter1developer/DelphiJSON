@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{95745F4E-5899-4549-B073-A8AE48ACD62B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TestJson.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\TestJsonTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TestJson">
+        <MSBuild Projects="TestJson.dproj"/>
+    </Target>
+    <Target Name="TestJson:Clean">
+        <MSBuild Projects="TestJson.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestJson:Make">
+        <MSBuild Projects="TestJson.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestJsonTests">
+        <MSBuild Projects="Test\TestJsonTests.dproj"/>
+    </Target>
+    <Target Name="TestJsonTests:Clean">
+        <MSBuild Projects="Test\TestJsonTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestJsonTests:Make">
+        <MSBuild Projects="Test\TestJsonTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TestJson;TestJsonTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TestJson:Clean;TestJsonTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TestJson:Make;TestJsonTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

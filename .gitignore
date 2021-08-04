@@ -1,0 +1,7 @@
+/Win32/
+/__history/
+/recovery/
+/Test/Win32/
+/Test/__history/
+/Test/recovery/
+*.dcu
